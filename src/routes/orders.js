@@ -20,8 +20,12 @@ routes.get('/:id', (req, res, next) => {
 
 // Insert a order
 routes.post('/', (req, res, next) => {
+  const { product_id, quantity } = req.body;
+  const order = { product_id, quantity }
+
   res.status(201).send({
-    message: 'Using POST method to create a new order'
+    message: 'Order created',
+    order
   });
 });
 

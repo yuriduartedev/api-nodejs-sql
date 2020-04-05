@@ -20,8 +20,12 @@ routes.get('/:id', (req, res, next) => {
 
 // Insert a product
 routes.post('/', (req, res, next) => {
+  const { name, price } = req.body
+  const product = { name, price }
+
   res.status(201).send({
-    message: 'Using POST method to create a new product'
+    message: 'Product successfully created',
+    product
   });
 });
 

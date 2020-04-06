@@ -7,7 +7,7 @@ module.exports = {
       if (allUsers.length > 0) {
         return res.status(200).json(allUsers);
       } else {
-        return res.status(200).json({ message: 'No User found' });
+        return res.status(200).json({ error: 'No User found' });
       }
     } catch (error) {
       console.log('Passou aqui.');
@@ -21,13 +21,13 @@ module.exports = {
   async addUser(req, res) {
     const { name, email, password } = req.body;
     if (!name) {
-      return res.status(400).json({ message: 'The name cannot be empty.' });
+      return res.status(400).json({ error: 'The name cannot be empty.' });
     }
     if (!email) {
-      return res.status(400).json({ message: 'The email cannot be empty.' });
+      return res.status(400).json({ error: 'The email cannot be empty.' });
     }
     if (!password) {
-      return res.status(400).json({ message: 'The password cannot be empty.' });
+      return res.status(400).json({ error: 'The password cannot be empty.' });
     }
     try {
       const createdUser = await User.create({ name, email, password });
@@ -42,7 +42,7 @@ module.exports = {
     const alteredUser = req.body;
     const { id } = req.params;
     if (!Number(id)) {
-      return res.status(400).json({ message: 'Please input a valid numeric id value' });
+      return res.status(400).json({ error: 'Please input a valid numeric id value' });
     }
     try {
       const updatedUser = await User.findOne({
@@ -52,9 +52,9 @@ module.exports = {
       if (updatedUser) {
         await User.update(alteredUser, { where: { id: Number(id) } });
 
-        return res.status(200).json({ message: 'User updated sucessfully' });
+        return res.status(200).json({ error: 'User updated sucessfully' });
       }
-    return res.status(204).json({ message: 'No Content' });
+    return res.status(204).json({ error: 'No Content' });
     } catch (error) {
       throw error;
     }
@@ -64,7 +64,7 @@ module.exports = {
     const { id } = req.params;
 
     if (!Number(id)) {
-      return res.status(400).json({ message: 'Please input a valid numeric id value' })
+      return res.status(400).json({ error: 'Please input a valid numeric id value' })
     }
 
     try {
@@ -82,7 +82,7 @@ module.exports = {
     const { id } = req.params;
 
     if (!Number(id)) {
-      return res.status(400).json({ message: 'Please input a valid numeric id value' })
+      return res.status(400).json({ error: 'Please input a valid numeric id value' })
     }
 
     try {
@@ -96,7 +96,7 @@ module.exports = {
         });
         return res.status(204).json(deletedUser);
       }
-    return res.status(400).json({ message: 'Not found' });
+    return res.status(400).json({ error: 'Not found' });
     } catch (error) {
       throw error;
     }

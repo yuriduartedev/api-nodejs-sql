@@ -18,7 +18,7 @@ module.exports = {
               request: {
                 type: 'GET',
                 description: 'Return all users',
-                url: `${process.env.APP_HOST}/${user.id}`
+                url: `${process.env.APP_HOST}/users/${user.id}`
               }
             }
           })

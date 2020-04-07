@@ -5,7 +5,25 @@ module.exports = {
     try {
       const allUsers = await User.findAll();
       if (allUsers.length > 0) {
-        return res.status(200).json(allUsers);
+        const response = {
+          quantity: allUsers.length,
+          users: allUsers.map(user => {
+            return {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              password: user.password,
+              createdAt: user.createdAt,
+              ipdatedAt: user.ipdatedAt,
+              request: {
+                type: 'GET',
+                description: 'Return all users',
+                url: `${process.env.APP_HOST}/${user.id}`
+              }
+            }
+          })
+        }
+        return res.status(200).json(response);
       } else {
         return res.status(200).json({ error: 'No User found' });
       }
@@ -96,7 +114,7 @@ module.exports = {
         });
         return res.status(204).json(deletedUser);
       }
-    return res.status(400).json({ error: 'Not found' });
+    return res.status(400).json({ error: 'User not found' });
     } catch (error) {
       throw error;
     }

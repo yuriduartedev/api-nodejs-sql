@@ -25,7 +25,7 @@ module.exports = {
         }
         return res.status(200).json(response);
       } else {
-        return res.status(200).json({ error: 'No User found' });
+        return res.status(200).json({ error: 'User not found' });
       }
     } catch (error) {
       console.log('Passou aqui.');

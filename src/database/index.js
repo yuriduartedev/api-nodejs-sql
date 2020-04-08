@@ -8,8 +8,13 @@ const connection = new Sequelize(dbConfig[env]);
 
 const User = require('../models/Users');
 const Product = require('../models/Products');
+const Order = require('../models/Orders');
 
 User.init(connection);
 Product.init(connection);
+Order.init(connection);
+
+User.associate(connection.models);
+Order.associate(connection.models);
 
 module.exports = connection;
